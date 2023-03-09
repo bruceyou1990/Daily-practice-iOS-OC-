@@ -16,42 +16,37 @@
 
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
-    [self creatUI];
+    [self creatBaseTabBarController];
 
 }
 
--(void)creatUI{
-    //创建UITabBarController
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-
+///creatBaseTabBarController 这个是整个APP的界面基础 启动实现显示的TabBar [底部几个菜单 和对应的页面]
+-(void)creatBaseTabBarController{
     //创建四个菜单项
     messageController *messageVC = [[messageController alloc] init];
-//    messageController.view.backgroundColor = [UIColor redColor];
     messageVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"消息" image:nil tag:0];
 
     UIViewController *contactsController = [[UIViewController alloc] init];
-    contactsController.view.backgroundColor = [UIColor yellowColor];
 
     contactsController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"通讯录" image:nil tag:1];
 
     UIViewController *discoverController = [[UIViewController alloc] init];
-    discoverController.view.backgroundColor = [UIColor brownColor];
 
     discoverController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现" image:nil tag:2];
 
     UIViewController *meController = [[UIViewController alloc] init];
-    meController.view.backgroundColor = [UIColor greenColor];
-
     meController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我" image:nil tag:3];
 
+    //创建UITabBarController
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     //向UITabBarController添加菜单项
     tabBarController.viewControllers = @[messageVC, contactsController, discoverController, meController];
 
     //将UITabBarController设置为根视图控制器
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
-
 }
+
 - (void)sceneDidDisconnect:(UIScene *)scene {
     // Called as the scene is being released by the system.
     // This occurs shortly after the scene enters the background, or when its session is discarded.
